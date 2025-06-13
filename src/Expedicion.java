@@ -21,10 +21,14 @@ public class Expedicion {
 
     public void listarParticipantes() {
         System.out.println("Participantes en expedición " + nombre + ":");
-        for (Participacion p : participantes) {
-            System.out.print("- ");
-            p.expedicionario.mostrarInfo();
-            System.out.println("  Rol: " + p.rol);
+        if (participantes.isEmpty()) {
+            System.out.println("  0 participantes");
+        } else {
+            for (Participacion p : participantes) {
+                System.out.print("- ");
+                p.expedicionario.mostrarInfo();
+                System.out.println("  Rol: " + p.rol);
+            }
         }
     }
 }
