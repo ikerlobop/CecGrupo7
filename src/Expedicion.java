@@ -1,11 +1,11 @@
 import java.util.*;
 
 public class Expedicion {
-    int id;
-    String nombre;
-    Date fecha;
-    Montania montania;
-    List<Participacion> participantes;
+    private int id;
+    private String nombre;
+    private Date fecha;
+    private Montania montania;
+    private List<Participacion> participantes;
 
     public Expedicion(int id, String nombre, Date fecha, Montania montania) {
         this.id = id;
@@ -13,6 +13,13 @@ public class Expedicion {
         this.fecha = fecha;
         this.montania = montania;
         this.participantes = new ArrayList<>();
+    }
+
+    public int getId() {
+        return id;
+    }
+    public String getNombre(){
+        return nombre;
     }
 
     public void agregarParticipante(Participacion p) {
@@ -32,3 +39,4 @@ public class Expedicion {
         }
     }
 }
+

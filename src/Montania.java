@@ -2,11 +2,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Montania {
-    int id;
-    String nombre;
-    float altura;
-    String dificultad;
-    List<Expedicion> expediciones;
+    private int id;
+    private String nombre;
+    private float altura;
+    private String dificultad;
+    private List<Expedicion> expediciones;
 
     public Montania(int id, String nombre, float altura, String dificultad) {
         this.id = id;
@@ -14,6 +14,10 @@ public class Montania {
         this.altura = altura;
         this.dificultad = dificultad;
         this.expediciones = new ArrayList<>();
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getNombre() {
@@ -31,7 +35,7 @@ public class Montania {
             System.out.println("Ninguna");
         } else {
             for (Expedicion e : expediciones) {
-                System.out.print(e.nombre + ", ");
+                System.out.print(e.getNombre() + ", ");
             }
             System.out.println();  // Salto de línea después de las expediciones
         }
