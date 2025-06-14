@@ -17,7 +17,7 @@ public class Main {
             System.out.println("5. Añadir participación");
             System.out.println("6. Ver participantes de expedición");
             System.out.println("7. Listar expedicionarios");
-            System.out.println("8. Listar montañas");
+            System.out.println("8. Listar montañas y expediones asociadas");
             System.out.println("0. Salir");
             System.out.print("Opción: ");
             opcion = sc.nextInt();
@@ -58,6 +58,9 @@ public class Main {
                     montanias.add(new Montania(montanias.size() + 1, nombre, altura, dificultad));
                 }
                 case 4 -> {
+                    System.out.println("--MONTAÑAS DISPONIBLES PARA EXPEDICIONES--");
+                    for (Montania m : montanias)
+                        System.out.println(m.id + " - " + m.nombre);
                     System.out.print("Nombre expedición: ");
                     String nombre = sc.nextLine();
                     System.out.print("Fecha (dd/mm/yyyy): ");
@@ -77,7 +80,10 @@ public class Main {
                             System.out.println(m.id + " - " + m.nombre);
                         int idMontania = sc.nextInt(); sc.nextLine();
                         Montania montania = montanias.get(idMontania - 1);
-                        expediciones.add(new Expedicion(expediciones.size() + 1, nombre, fecha, montania));
+                        Expedicion nuevaExpedicion =new Expedicion(expediciones.size() + 1, nombre, fecha, montania);
+                        expediciones.add(nuevaExpedicion);
+                        montania.anadirExpedicion(nuevaExpedicion);
+
                     } catch (Exception e) {
                         System.out.println("Fecha inválida o montaña no encontrada.");
                     }
@@ -92,15 +98,17 @@ public class Main {
                         break;
                     }
                     for (Expedicion e : expediciones)
-                        System.out.println(e.id + " - " + e.nombre);
+                        System.out.println(e.id + " - " + e.nombre );
                     System.out.print("ID Expedición: ");
                     int idExp = sc.nextInt(); sc.nextLine();
                     if (idExp <= 0 || idExp > expediciones.size()) {
                         System.out.println("ID de expedición no válido.");
                         break;
                     }
-                    for (Expedicionario ex : expedicionarios)
-                        System.out.println(ex.getId() + " - " + ex.getNombre());
+                    for (Expedicionario ex : expedicionarios) {
+                        String rol = (ex instanceof Alpinista) ? "Alpinista" : "Médico";
+                        System.out.println(ex.getId() + " - " + ex.getNombre() + " Especialidad " + rol);
+                    }
                     System.out.print("ID Expedicionario: ");
                     int idExped = sc.nextInt(); sc.nextLine();
                     if (idExped <= 0 || idExped > expedicionarios.size()) {
@@ -141,7 +149,7 @@ public class Main {
                     if (montanias.isEmpty()) {
                         System.out.println("  0 montañas registradas");
                     } else {
-                        for (Montania m : montanias) {
+                        for (Montania m : montanias)  {
                             m.mostrarInfo();
                         }
                     }
