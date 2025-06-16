@@ -25,12 +25,26 @@ public class Montania {
     }
 
     public void anadirExpedicion(Expedicion e){
+        // Precondición: La expedición no debe ser nula
+        if (e == null) {
+            throw new IllegalArgumentException("La expedición no puede ser nula.");
+        }
+
+        // Añadimos la expedición a la lista de expediciones
         expediciones.add(e);
+
+        // Postcondición: La expedición se debe haber añadido a la lista de expediciones
+        assert expediciones.contains(e) : "La expedición no ha sido añadida correctamente.";
+
     }
 
     public void mostrarInfo() {
+        // Precondición: La lista de expediciones no debe ser nula
+        assert expediciones != null : "La lista de expediciones no debe ser nula.";
+        //Mostramos la información de la montaña
         System.out.print("Montaña: " + nombre + " | Altura: " + altura + "m | Dificultad: " + dificultad + " | ");
         System.out.print("Expediciones Asociadas: ");
+        //Postcondición: Si la  lista de expediciones esta vacia, de debe imprimir "Ninguna"
         if (expediciones.isEmpty()) {
             System.out.println("Ninguna");
         } else {
